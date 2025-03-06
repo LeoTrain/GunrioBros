@@ -545,7 +545,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.47, y: -0.46, z: -10}
+  m_LocalPosition: {x: -8.23, y: -0.1, z: -10.036568}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1263,7 +1263,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 0}
+    TrackingTarget: {fileID: 1731757428}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -1295,7 +1295,7 @@ Transform:
   m_GameObject: {fileID: 1472392015}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.47, y: -0.46, z: -10}
+  m_LocalPosition: {x: -8.23, y: -0.1, z: -10.036568}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1474,6 +1474,8 @@ MonoBehaviour:
   deceleration: 10
   jumpHeight: 7
   jumpCount: 0
+  IsIdle: 0
+  IsJumping: 0
 --- !u!61 &1731757424
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1633,7 +1635,7 @@ Transform:
   m_GameObject: {fileID: 1731757422}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23043418, y: 0.21128069, z: -0.036567736}
+  m_LocalPosition: {x: -8.23, y: -0.1, z: -0.036567736}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

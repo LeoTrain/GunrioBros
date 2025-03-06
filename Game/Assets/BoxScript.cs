@@ -10,13 +10,15 @@ public class BoxScript : MonoBehaviour
     public float deceleration = 10f;
     public float jumpHeight = 7;
     public int jumpCount = 0;
+    public Animator animator;
 
     private float moveInput = 0f;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        this.animator = GetComponent<Animator>();        
     }
 
     // Update is called once per frame
@@ -43,6 +45,7 @@ public class BoxScript : MonoBehaviour
 
     void Jump()
     {
+        this.animator.SetTrigger("Jump");
         myRigidBody.linearVelocity = new Vector2(this.myRigidBody.linearVelocity.x, this.jumpHeight);
         this.jumpCount = 1;
     }
@@ -52,6 +55,7 @@ public class BoxScript : MonoBehaviour
         if (collision.gameObject.tag == "Terrain")
         {
             this.jumpCount = 0;
+            this.animator.SetTrigger("Idle");
         }
     }
 }
