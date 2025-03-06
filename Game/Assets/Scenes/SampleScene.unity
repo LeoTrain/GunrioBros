@@ -791,10 +791,10 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &817037730
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -879,9 +879,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRigidBody: {fileID: 817037729}
   speed: 4
+  acceleration: 15
+  deceleration: 10
   jumpHeight: 7
   jumpCount: 0
-  lifePoints: 5
 --- !u!61 &817037733
 BoxCollider2D:
   m_ObjectHideFlags: 0
