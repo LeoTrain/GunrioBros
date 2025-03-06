@@ -18,15 +18,18 @@ public class BoxScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && this.jumpCount == 0)
             myRigidBody.linearVelocity = Vector2.right * this.speed;
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && this.jumpCount == 0)
             myRigidBody.linearVelocity = Vector2.left * this.speed;
         if (Input.GetKeyDown(KeyCode.Space) && this.jumpCount == 0)
-        { 
-            myRigidBody.linearVelocity = Vector2.up * this.jumpHeight;
-            this.jumpCount = 1;
-        }
+            this.Jump();
+    }
+
+    void Jump()
+    {
+        myRigidBody.linearVelocity = Vector2.up * this.jumpHeight;
+        this.jumpCount = 1;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
