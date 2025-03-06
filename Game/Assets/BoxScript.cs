@@ -28,7 +28,7 @@ public class BoxScript : MonoBehaviour
 
     void Jump()
     {
-        myRigidBody.linearVelocity = Vector2.up * this.jumpHeight;
+        myRigidBody.linearVelocity = new Vector2(this.myRigidBody.linearVelocity.x, this.jumpHeight);
         this.jumpCount = 1;
     }
 
