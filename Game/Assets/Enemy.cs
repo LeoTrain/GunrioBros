@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
   public float speed = 0.01f;
 	public Vector2 boundary = Vector2.left;
   public float boundarySize = 5f;
-  public bool InBoundary = false;
 	public Vector2 current_direction = Vector2.left;
   public Vector2 position;
 
@@ -29,45 +28,44 @@ public class Enemy : MonoBehaviour
 
   void Move()
   {
-    if (this.IsInBoundaries())
-      this.Thrust();
-  }
-
-  void Thrust()
-  {
+    if (!this.IsOutOfBoundary())
+    {
       float x = this.current_direction.x * this.speed * Time.deltaTime;
       this.transform.position = new Vector2(x + this.transform.position.x, this.transform.position.y);
+    }
   }
 
   void CheckToSwitch()
   {
-    if (this.IsLimitRight())
+    if (this.IsLimitRight() && this.current_direction != Vector2.left)
+    {
       this.current_direction = Vector2.left;
-    else if (this.IsLimitLeft())
+      this.transform.position = new Vector2(this.current_direction.x + this.transform.position.x, this.transform.position.y);
+    }
+    else if (this.IsLimitLeft() && this.current_direction != Vector2.right)
+    {
       this.current_direction = Vector2.right;
+      this.transform.position = new Vector2(this.current_direction.x + this.transform.position.x, this.transform.position.y);
+    }
   }
 
-  bool IsInBoundaries()
+  bool IsOutOfBoundary()
   {
-    if (!this.IsLimitRight() || !this.IsLimitLeft())
-    {
-      this.InBoundary = true;
+    if (this.IsLimitRight() || this.IsLimitLeft())
       return true;
-    }
-    this.InBoundary = false;
     return false;
   }
 
   bool IsLimitLeft()
   {
-		if (this.transform.position.x - 0.5f <= this.boundary.x)	
+		if (this.transform.position.x <= this.boundary.x)	
 			return true;
 		return false;
   }
 
   bool IsLimitRight()
 	{
-		if (transform.position.x >= this.boundary.x)	
+		if (transform.position.x >= this.boundary.y)	
 			return true;
 		return false;
 	} 
