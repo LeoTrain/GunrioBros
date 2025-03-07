@@ -2,13 +2,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public GameObject player;
-  public Rigidbody2D rigidBody;
   public float speed = 0.01f;
+	public Vector2 current_direction = Vector2.left;
 	public Vector2 boundary = Vector2.left;
   public float boundarySize = 5f;
-	public Vector2 current_direction = Vector2.left;
-  public Vector2 position;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
@@ -21,7 +18,6 @@ public class Enemy : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    this.position = transform.position;
     this.CheckToSwitch();
     this.Move();
   }
@@ -33,6 +29,12 @@ public class Enemy : MonoBehaviour
       float x = this.current_direction.x * this.speed * Time.deltaTime;
       this.transform.position = new Vector2(x + this.transform.position.x, this.transform.position.y);
     }
+  }
+
+  void OnCollisionEnter2D(Collision2D collision)
+  {
+      if (collision.gameObject.tag == "Player" && this.ComesFromAbove(collision.gameObject.transform.position.y))
+        Destroy(this.gameObject);
   }
 
   void CheckToSwitch()
@@ -47,6 +49,13 @@ public class Enemy : MonoBehaviour
       this.current_direction = Vector2.right;
       this.transform.position = new Vector2(this.current_direction.x + this.transform.position.x, this.transform.position.y);
     }
+  }
+
+  bool ComesFromAbove(float y1)
+  {
+    if (y1 > this.transform.position.y)
+      return true;
+    return false;
   }
 
   bool IsOutOfBoundary()
@@ -69,9 +78,4 @@ public class Enemy : MonoBehaviour
 			return true;
 		return false;
 	} 
-
-	bool IsInPlayerRange()
-  {
-    return true;
-  }
 }
