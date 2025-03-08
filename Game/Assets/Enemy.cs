@@ -6,13 +6,12 @@ public class Enemy : MonoBehaviour
 	public Vector2 current_direction = Vector2.left;
 	public Vector2 boundary = Vector2.left;
   public float boundarySize = 5f;
+  public float playerFindRadius = 7f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
-    float left = transform.position.x - this.boundarySize;
-    float right = transform.position.x + this.boundarySize;
-    this.boundary = new Vector2(left, right);
+    this.boundary = this.CalculateBoundaries();
   }
 
   // Update is called once per frame
@@ -35,6 +34,18 @@ public class Enemy : MonoBehaviour
   {
       if (collision.gameObject.tag == "Player" && this.ComesFromAbove(collision.gameObject.transform.position.y))
         Destroy(this.gameObject);
+  }
+
+  bool IsPlayerinRadius()
+  {
+    
+  }
+
+  Vector2 CalculateBoundaries()
+  {
+    float left = transform.position.x - this.boundarySize;
+    float right = transform.position.x + this.boundarySize;
+    return (new Vector2(left, right));
   }
 
   void CheckToSwitch()
