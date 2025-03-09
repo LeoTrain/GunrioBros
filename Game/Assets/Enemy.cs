@@ -32,9 +32,10 @@ public class Enemy : MonoBehaviour
 
   void OnCollisionEnter2D(Collision2D collision)
   {
-      if (collision.gameObject.tag == "Player" && this.ComesFromAbove(collision.gameObject.transform.position.y))
+      if (collision.gameObject.tag == "Player")
       {
-        Destroy(this.gameObject);
+        if (this.ComesFromAbove(collision.gameObject.transform.position.y)) Destroy(this.gameObject);
+        else collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(1);
       }
   }
 
