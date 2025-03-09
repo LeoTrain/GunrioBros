@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxScript : MonoBehaviour
+public class BoxScriptBaszi : MonoBehaviour
 {
     public Rigidbody2D myRigidBody;
     public float speed = 4f;
