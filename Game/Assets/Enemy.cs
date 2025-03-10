@@ -40,7 +40,6 @@ public class Enemy : MonoBehaviour
       }
   }
 
-<<<<<<< Updated upstream
   bool IsPlayerinRadius()
   {
         float difference = this.transform.position.x - GameObject.Find("Player").transform.position.x;
@@ -59,8 +58,6 @@ public class Enemy : MonoBehaviour
         this.Move();
     }
 
-=======
->>>>>>> Stashed changes
   Vector2 CalculateBoundaries()
   {
     float left = transform.position.x - this.boundarySize;
