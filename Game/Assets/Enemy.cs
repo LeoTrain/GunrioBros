@@ -59,6 +59,8 @@ public class Enemy : MonoBehaviour
         this.Move();
     }
 
+=======
+>>>>>>> Stashed changes
   Vector2 CalculateBoundaries()
   {
     float left = transform.position.x - this.boundarySize;
