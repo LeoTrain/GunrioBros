@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
       }
   }
 
+<<<<<<< Updated upstream
   bool IsPlayerinRadius()
   {
         float difference = this.transform.position.x - GameObject.Find("Player").transform.position.x;
