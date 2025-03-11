@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RedShroomScript : MonoBehaviour
 {
+    public GameObject player;
+    public float speed = 1.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,4 +24,21 @@ public class RedShroomScript : MonoBehaviour
         Destroy(this.gameObject);
       }
     }
+
+    void FixedUpdate()
+    {
+      Vector2 direction = GetDirection();
+      transform.Translate(direction * speed * Time.deltaTime);
+    }
+
+    Vector2 GetDirection()
+    {
+      Vector2 direction = Vector2.left;
+      if (player.transform.position.x < transform.position.x)
+      {
+        direction = Vector2.right;
+      }
+      return direction;
+    }
+
 }
