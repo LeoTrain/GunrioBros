@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpawnObjectScript : MonoBehaviour
 {
-    public GameObject player;
+    [SerializeField] GameObject player;
     [SerializeField] GameObject[] objects;
     [SerializeField] Sprite[] sprites;
     [SerializeField] Sprite currentSprite;

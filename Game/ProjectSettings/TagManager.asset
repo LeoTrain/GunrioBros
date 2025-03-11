@@ -45,5 +45,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 501876023
+    locked: 0
+  - name: Blocks_Pipes
+    uniqueID: 3482768115
+    locked: 0
+  - name: Entities
+    uniqueID: 3458312681
+    locked: 0
   m_RenderingLayers:
   - Default

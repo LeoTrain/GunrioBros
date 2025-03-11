@@ -37,4 +37,10 @@ public class ConsumableCollisionScript : MonoBehaviour
       // To modify with the actual power up logic
       return ;
     }
+
+    public void StarPowerPlayer()
+    {
+      // To modify with the actual power up logic
+      return ;
+    }
 }
