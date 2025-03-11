@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
   void Move()
   {
       float x = this.current_direction.x * this.speed * Time.deltaTime;
-      this.transform.position = new Vector2(x + this.transform.position.x, this.transform.position.y);
+      this.transform.Translate(x, 0, 0);
   }
 
   void OnCollisionEnter2D(Collision2D collision)
