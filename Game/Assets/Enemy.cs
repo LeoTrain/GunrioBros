@@ -18,24 +18,26 @@ public class Enemy : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    this.CheckToSwitch();
-    this.Move();
+    if (this.IsPlayerinRadius()) this.MoveToPlayer();
+    else
+    {
+        this.CheckToSwitch();
+        this.Move();
+    }
   }
 
   void Move()
   {
-    if (!this.IsOutOfBoundary())
-    {
       float x = this.current_direction.x * this.speed * Time.deltaTime;
       this.transform.position = new Vector2(x + this.transform.position.x, this.transform.position.y);
-    }
   }
 
   void OnCollisionEnter2D(Collision2D collision)
   {
-      if (collision.gameObject.tag == "Player" && this.ComesFromAbove(collision.gameObject.transform.position.y))
+      if (collision.gameObject.tag == "Player")
       {
-        Destroy(this.gameObject);
+        if (this.ComesFromAbove(collision.gameObject.transform.position.y)) Destroy(this.gameObject);
+        else collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(1);
       }
   }
 
@@ -50,8 +52,21 @@ public class Enemy : MonoBehaviour
 
   bool IsPlayerinRadius()
   {
-    return false;
+        float difference = this.transform.position.x - GameObject.Find("Player").transform.position.x;
+        if (difference < this.playerFindRadius && difference > -this.playerFindRadius)
+            return true;
+        return false;
   }
+
+    void MoveToPlayer()
+    {
+        float difference = this.transform.position.x - GameObject.Find("Player").transform.position.x;
+        if (difference > 0)
+            this.current_direction = Vector2.left;
+        else
+            this.current_direction = Vector2.right;
+        this.Move();
+    }
 
   Vector2 CalculateBoundaries()
   {
@@ -80,14 +95,6 @@ public class Enemy : MonoBehaviour
       return true;
     return false;
   }
-
-  bool IsOutOfBoundary()
-  {
-    if (this.IsLimitRight() || this.IsLimitLeft())
-      return true;
-    return false;
-  }
-
   bool IsLimitLeft()
   {
 		if (this.transform.position.x <= this.boundary.x)	
