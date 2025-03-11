@@ -13,6 +13,7 @@ public class BoxScript : MonoBehaviour
     public Animator animator;
 
     private float moveInput = 0f;
+    private bool isFacingRight = true;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,8 +26,8 @@ public class BoxScript : MonoBehaviour
     void Update()
     {
         this.moveInput = 0f;
-        if (Input.GetKey(KeyCode.D)) this.moveInput = 1f;
-        if (Input.GetKey(KeyCode.A)) this.moveInput = -1f;
+        if (Input.GetKey(KeyCode.D)) { this.moveInput = 1f; isFacingRight = true; };
+        if (Input.GetKey(KeyCode.A)) { this.moveInput = -1f; isFacingRight = false; };
         if (Input.GetKeyDown(KeyCode.Space) && this.jumpCount == 0) this.Jump();
     }
 
@@ -35,12 +36,25 @@ public class BoxScript : MonoBehaviour
         this.Move();
     }
 
+    void Turn()
+    {
+        if (isFacingRight)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+    }
+
     void Move()
     { 
         float targetVelocity = this.moveInput * this.speed;
         float velocityDifference = targetVelocity - this.myRigidBody.linearVelocity.x;
         float force = (this.moveInput != 0) ? this.acceleration * velocityDifference : -this.deceleration * this.myRigidBody.linearVelocity.x;
         this.myRigidBody.AddForce(Vector2.right * force, ForceMode2D.Force);
+        Turn();
     }
 
     void Jump()
@@ -58,4 +72,5 @@ public class BoxScript : MonoBehaviour
             this.animator.SetTrigger("Idle");
         }
     }
+
 }
