@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class RedShroomScript : MonoBehaviour
 {
-    public GameObject player;
     public float speed = 1.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -33,6 +31,7 @@ public class RedShroomScript : MonoBehaviour
 
     Vector2 GetDirection()
     {
+      GameObject player = GameObject.Find("Player");
       Vector2 direction = Vector2.left;
       if (player.transform.position.x < transform.position.x)
       {

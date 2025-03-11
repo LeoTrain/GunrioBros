@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ConsumableCollisionScript : MonoBehaviour
@@ -17,6 +18,6 @@ public class ConsumableCollisionScript : MonoBehaviour
     public void ScalePlayer()
     {
       // To modify with the actual growing logic
-      this.transform.localScale = new Vector3(8, 8, 1);
+      this.transform.localScale = new Vector3(4, 4, 1);
     }
 }
