@@ -32,6 +32,13 @@ public class SpawnObjectScript : MonoBehaviour
 
     void SpawnAbove()
     {
+        if (objects.Length == 0)
+            return;
+        
+        float probability = 0.7f;
+        if (Random.Range(0.0f, 1.0f) > probability)
+            return;
+
         Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + transform.localScale.y);
         int randomIndex = Random.Range(0, objects.Length);
         Instantiate(objects[randomIndex], spawnPosition, Quaternion.identity);
