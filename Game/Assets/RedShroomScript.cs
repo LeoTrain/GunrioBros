@@ -21,6 +21,10 @@ public class RedShroomScript : MonoBehaviour
         collision.gameObject.GetComponent<ConsumableCollisionScript>().ScalePlayer();
         Destroy(this.gameObject);
       }
+      else if (collision.gameObject.tag == "Enemy")
+      {
+        Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+      }
     }
 
     void FixedUpdate()

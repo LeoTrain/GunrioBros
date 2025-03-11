@@ -52,7 +52,7 @@ public class BoxScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Terrain")
+        if (collision.gameObject.tag == "Terrain" || collision.gameObject.tag == "Block")
         {
             this.jumpCount = 0;
             this.animator.SetTrigger("Idle");

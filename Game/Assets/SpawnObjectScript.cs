@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpawnObjectScript : MonoBehaviour
 {
     public GameObject player;
-    public GameObject shroom_red;
+    [SerializeField] GameObject[] objects;
     [SerializeField] Sprite[] sprites;
     [SerializeField] Sprite currentSprite;
     private bool hasBeenHit = false;
@@ -33,7 +33,8 @@ public class SpawnObjectScript : MonoBehaviour
     void SpawnAbove()
     {
         Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + transform.localScale.y);
-        Instantiate(shroom_red, spawnPosition, Quaternion.identity);
+        int randomIndex = Random.Range(0, objects.Length);
+        Instantiate(objects[randomIndex], spawnPosition, Quaternion.identity);
     }
 
     bool PlayerComesFromBottom()

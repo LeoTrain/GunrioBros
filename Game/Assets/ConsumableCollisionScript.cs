@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class ConsumableCollisionScript : MonoBehaviour
 {
@@ -29,5 +30,11 @@ public class ConsumableCollisionScript : MonoBehaviour
       this.transform.localScale = new Vector3(4, 4, 1);
       isBigger = true;
       lastGrowTime = DateTime.Now;
+    }
+
+    public void FlowerPowerPlayer()
+    {
+      // To modify with the actual power up logic
+      return ;
     }
 }
