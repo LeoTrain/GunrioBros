@@ -4,6 +4,9 @@ public class SpawnObjectScript : MonoBehaviour
 {
     public GameObject player;
     public GameObject shroom_red;
+    [SerializeField] Sprite[] sprites;
+    [SerializeField] Sprite currentSprite;
+    private bool hasBeenHit = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,9 +21,12 @@ public class SpawnObjectScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" && PlayerComesFromBottom())
+        if (collision.gameObject.tag == "Player" && PlayerComesFromBottom() && !hasBeenHit)
         {
+            currentSprite = sprites[1];
+            gameObject.GetComponent<SpriteRenderer>().sprite = currentSprite;
             SpawnAbove();
+            hasBeenHit = true;
         }
     }
 
