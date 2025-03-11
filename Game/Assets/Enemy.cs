@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 	public Vector2 boundary = Vector2.left;
   public float boundarySize = 5f;
   public float playerFindRadius = 7f;
+  public int lifePoints = 3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
@@ -36,6 +37,15 @@ public class Enemy : MonoBehaviour
       {
         Destroy(this.gameObject);
       }
+  }
+
+  public void TakeDamage(int damageIncome)
+  {
+    this.lifePoints -= damageIncome;
+    if (this.lifePoints <= 0)
+    {
+      Destroy(this.gameObject);
+    }
   }
 
   bool IsPlayerinRadius()
