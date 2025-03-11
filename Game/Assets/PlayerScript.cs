@@ -20,6 +20,7 @@ public class BoxScript : MonoBehaviour
     void Start()
     {
         this.animator = GetComponent<Animator>();        
+        transform.eulerAngles = new Vector3(0, 180, 0);
     }
 
     // Update is called once per frame
@@ -40,11 +41,11 @@ public class BoxScript : MonoBehaviour
     {
         if (isFacingRight)
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
         else
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
     }
 
