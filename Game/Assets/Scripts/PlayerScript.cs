@@ -20,7 +20,6 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         this.animator = GetComponent<Animator>();        
-        transform.eulerAngles = new Vector3(0, 180, 0);
     }
 
     // Update is called once per frame
