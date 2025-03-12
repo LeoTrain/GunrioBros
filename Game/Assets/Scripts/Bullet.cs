@@ -21,6 +21,10 @@ public class BulletScript : MonoBehaviour
         {
             collision.gameObject.GetComponent<GoombaScript>().TakeDamage(this.damage);
         }
+        else if (collision.gameObject.tag == "Player")
+        {
+            return;
+        }
         Destroy(gameObject);
     }
 

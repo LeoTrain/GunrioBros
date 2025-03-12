@@ -1,9 +1,10 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public Transform firePoint;
+    [SerializeField] Transform firePoint;
     public float fireRate = 0.5f;
     public float maxAngle = 45f;
 
@@ -11,7 +12,8 @@ public class GunScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        firePoint = transform.Find("OutputPointGun");
+        firePoint.position = CalculateFirePoint();
     }
 
     // Update is called once per frame
@@ -28,7 +30,14 @@ public class GunScript : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate (bulletPrefab, firePoint.position, firePoint.rotation);
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    }
+
+    private Vector2 CalculateFirePoint()
+    {
+        float half_width = transform.localScale.x / 2 * 0.1f;
+        float half_height = transform.localScale.y / 2 * -0.06f;
+        return new Vector2(transform.position.x - half_width, transform.position.y - half_height);
     }
     void Aim()
     {

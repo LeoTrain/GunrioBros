@@ -11,7 +11,8 @@ public class PlayerScript : MonoBehaviour
     public float jumpHeight = 7;
     public int jumpCount = 0;
     public Animator animator;
-
+    public GameObject current_weapon;
+    [SerializeField] private Transform _grabPoint;
     private float moveInput = 0f;
     private bool isFacingRight = true;
 
@@ -41,10 +42,28 @@ public class PlayerScript : MonoBehaviour
         if (isFacingRight)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
+            try
+            {
+                //_grabPoint.GetComponent<GrabGunScript>().Turn(1);
+                this.GetComponent<GrabGunScript>().TurnWeapon();
+            }
+            catch (System.Exception)
+            {
+                Debug.Log("No weapon right turn");
+            }
         }
         else
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
+            // try
+            // {
+            //     //_grabPoint.GetComponent<GrabGunScript>().Turn(-1);
+            //     _grabPoint.GetComponentInChildren<GrabGunScript>().Turn(-1);
+            // }
+            // catch (System.Exception)
+            // {
+            //     Debug.Log("No weapon");
+            // }
         }
     }
 
