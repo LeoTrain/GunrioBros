@@ -11,6 +11,7 @@ public class GunScript : MonoBehaviour
     public float maxAngle = 60f;
     private bool isFacingRight = false;
     private float nextFireTime = 0f;
+    private bool PlayerPickedUpGun = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,11 +22,14 @@ public class GunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Aim();
-        if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
+        if (PlayerPickedUpGun)
         {
-            Shoot();
-            nextFireTime = Time.time + 1f / fireRate;
+            Aim();
+            if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
+            {
+                Shoot();
+                nextFireTime = Time.time + 1f / fireRate;
+            }
         }
     }
 
@@ -57,4 +61,9 @@ public class GunScript : MonoBehaviour
         else
             firePoint.localPosition = new Vector3(-Mathf.Abs(firePoint.localPosition.x), firePoint.localPosition.y, firePoint.localPosition.z);
     } 
+
+    public void GunPickedUp()
+    {
+        PlayerPickedUpGun = true;
+    }
 }

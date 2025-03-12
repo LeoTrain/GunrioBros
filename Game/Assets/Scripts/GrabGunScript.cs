@@ -36,6 +36,7 @@ public class GrabGunScript : MonoBehaviour
             weapon.transform.SetParent(_grabPoint);
             _grabbedGun = weapon;
             isGrabbed = true;
+            weapon.GetComponent<GunScript>().GunPickedUp();
             return true;
         }
         return false;

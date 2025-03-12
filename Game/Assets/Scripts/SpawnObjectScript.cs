@@ -39,7 +39,7 @@ public class SpawnObjectScript : MonoBehaviour
         if (Random.Range(0.0f, 1.0f) > probability)
             return;
 
-        Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + transform.localScale.y);
+        Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + 1);
         int randomIndex = Random.Range(0, objects.Length);
         Instantiate(objects[randomIndex], spawnPosition, Quaternion.identity);
     }

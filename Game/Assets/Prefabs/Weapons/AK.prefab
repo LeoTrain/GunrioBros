@@ -105,7 +105,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3239523847508664698, guid: 87fe8cb0847a2626c890b855eeb45672, type: 3}
   firePoint: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  fireRate: 1
+  fireRate: 3
   maxAngle: 45
 --- !u!61 &-8589489820772764148
 BoxCollider2D:
