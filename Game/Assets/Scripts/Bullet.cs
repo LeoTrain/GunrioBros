@@ -1,3 +1,5 @@
+using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
@@ -5,14 +7,22 @@ public class BulletScript : MonoBehaviour
     public float speed = 10f;
     public float lifetime = 2f;
     private Rigidbody2D rb;
-
     public int damage = 1;
+    [SerializeField] private GameObject player;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = transform.right * speed;
+        rb.linearVelocity = speed * transform.right;
         Destroy(gameObject, lifetime);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -23,17 +33,14 @@ public class BulletScript : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
-            // Make it so the bullet passes through the player
-            return;
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+            return ;
         }
         Destroy(gameObject);
     }
 
-
-    // Update is called once per frame
-
-    void Update()
-    {
-        
-    }
+    // private void SetDirection()
+    // {
+    //     direction = player.GetComponent<PlayerScript>().isFacingRight ? UnityEngine.Vector2.right : UnityEngine.Vector2.left;
+    // }
 }

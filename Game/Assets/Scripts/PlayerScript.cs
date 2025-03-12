@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    public bool isFacingRight = false;
     public Rigidbody2D myRigidBody;
     public float speed = 4f;
     public float acceleration = 15f;
@@ -14,7 +15,6 @@ public class PlayerScript : MonoBehaviour
     public GameObject current_weapon;
     [SerializeField] private Transform _grabPoint;
     private float moveInput = 0f;
-    private bool isFacingRight = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        this.Move();
+        Move();
     }
 
     void Turn()
