@@ -9,13 +9,15 @@ public class BulletScript : MonoBehaviour
     private Rigidbody2D rb;
     public int damage = 1;
     [SerializeField] private GameObject player;
+    private UnityEngine.Vector2 direction;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.Find("Player");
+        SetDirection();
         rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = speed * transform.right;
+        rb.linearVelocity = speed * direction;
         Destroy(gameObject, lifetime);
     }
 
@@ -39,8 +41,8 @@ public class BulletScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // private void SetDirection()
-    // {
-    //     direction = player.GetComponent<PlayerScript>().isFacingRight ? UnityEngine.Vector2.right : UnityEngine.Vector2.left;
-    // }
+    private void SetDirection()
+    {
+        direction = player.GetComponent<PlayerScript>().isFacingRight ? transform.right : transform.right * -1;
+    }
 }
