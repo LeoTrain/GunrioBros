@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -5,13 +6,16 @@ public class GunScript : MonoBehaviour
 {
     public GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
+    [SerializeField] SpriteRenderer spriteRenderer;
     public float fireRate = 0.5f;
     public float maxAngle = 45f;
+    private bool isFacingRight = false;
 
     private float nextFireTime = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         firePoint = transform.Find("OutputPointGun");
         firePoint.position = CalculateFirePoint();
     }
@@ -19,13 +23,12 @@ public class GunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Aim();
         if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
         {
             Shoot();
             nextFireTime = Time.time + 1f / fireRate;
         }
-        
+        Aim();
     }
 
     void Shoot()
@@ -45,6 +48,14 @@ public class GunScript : MonoBehaviour
         Vector2 direction = mousePos - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle = Mathf.Clamp(angle, -maxAngle, maxAngle);
-        transform.rotation = Quaternion.Euler (new Vector3(0, 0, angle));
+        Debug.Log(angle);
+        if (!isFacingRight) angle = -angle;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
+    public void FlipWeapon(bool isFacingRight)
+    {
+        if (spriteRenderer != null)
+            spriteRenderer.flipX = !isFacingRight;
+        this.isFacingRight = isFacingRight;
+    } 
 }

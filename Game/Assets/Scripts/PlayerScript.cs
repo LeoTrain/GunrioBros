@@ -27,8 +27,8 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         this.moveInput = 0f;
-        if (Input.GetKey(KeyCode.D)) { this.moveInput = 1f; isFacingRight = true; };
-        if (Input.GetKey(KeyCode.A)) { this.moveInput = -1f; isFacingRight = false; };
+        if (Input.GetKey(KeyCode.D)) { this.moveInput = 1f; isFacingRight = true; Turn(); };
+        if (Input.GetKey(KeyCode.A)) { this.moveInput = -1f; isFacingRight = false; Turn(); };
         if (Input.GetKeyDown(KeyCode.Space) && this.jumpCount == 0) this.Jump();
     }
 
@@ -39,58 +39,15 @@ public class PlayerScript : MonoBehaviour
 
     void Turn()
     {
-        if (isFacingRight)
+        transform.eulerAngles = isFacingRight ? new Vector3(0, 180, 0) : new Vector3(0, 0, 0); 
+        if (_grabPoint.transform.childCount > 0)
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-
-            if (_grabPoint.transform.childCount > 0)
-            {
-                Transform gun = _grabPoint.transform.GetChild(0);
-                Debug.Log("Before rotation: " + _grabPoint.transform.localRotation.eulerAngles);
-                _grabPoint.transform.localRotation = Quaternion.Euler(0, isFacingRight ? 180 : 0, 0);
-                Debug.Log("After rotation: " + _grabPoint.transform.localRotation.eulerAngles);
-            }
+            Transform gun = _grabPoint.transform.GetChild(0);
+            GunScript gunScript = gun.GetComponent<GunScript>();
+            if (gunScript != null)
+                gunScript.FlipWeapon(isFacingRight);
             else
-                Debug.LogWarning("No child object found under _grabPoint!");
-         
-            try
-            {
-                // if (GetComponent<GrabGunScript>().isGrabbed)
-                    // _grabPoint.GetChild(0).GetComponent<GunScript>().FlipWeapon(isFacingRight);
-                    // _grabPoint.transform.localRotation.eulerAngles.Set(0, 0, 0);
-                    // _grabPoint.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-            catch
-            {
-                Debug.Log("Error turning grab point child 0");
-            }
-
-        }
-        else
-        {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-
-            if (_grabPoint.transform.childCount > 0)
-            {
-                Transform gun = _grabPoint.transform.GetChild(0);
-                Debug.Log("Before rotation: " + _grabPoint.transform.localRotation.eulerAngles);
-                _grabPoint.transform.localRotation = Quaternion.Euler(0, isFacingRight ? 0 : 180, 0);
-                Debug.Log("After rotation: " + _grabPoint.transform.localRotation.eulerAngles);
-            }
-            else
-                Debug.LogWarning("No child object found under _grabPoint!");
-
-            try
-            {
-                // if (GetComponent<GrabGunScript>().isGrabbed)
-                    // _grabPoint.GetChild(0).GetComponent<GunScript>().FlipWeapon(isFacingRight);
-                    // _grabPoint.transform.localRotation.eulerAngles.Set(0, 180, 0);
-                    // _grabPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-            catch
-            {
-                Debug.Log("Error turning grab point child 0");
-            }
+                Debug.LogWarning("GunScript not found on weapon!");
         }
     }
 
@@ -100,7 +57,6 @@ public class PlayerScript : MonoBehaviour
         float velocityDifference = targetVelocity - this.myRigidBody.linearVelocity.x;
         float force = (this.moveInput != 0) ? this.acceleration * velocityDifference : -this.deceleration * this.myRigidBody.linearVelocity.x;
         this.myRigidBody.AddForce(Vector2.right * force, ForceMode2D.Force);
-        Turn();
     }
 
     void Jump()
