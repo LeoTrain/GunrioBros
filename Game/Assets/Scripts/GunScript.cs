@@ -31,7 +31,6 @@ public class GunScript : MonoBehaviour
 
     void Shoot()
     {
-        Debug.Log("Shoot " + firePoint.rotation);
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 
@@ -47,9 +46,11 @@ public class GunScript : MonoBehaviour
     public void FlipWeapon(bool isFacingRight)
     {
         if (spriteRenderer != null)
-        {
             spriteRenderer.flipX = !isFacingRight;
-        }
         this.isFacingRight = isFacingRight;
+        if (isFacingRight)
+            firePoint.localPosition = new Vector3(Mathf.Abs(firePoint.localPosition.x), firePoint.localPosition.y, firePoint.localPosition.z);
+        else
+            firePoint.localPosition = new Vector3(-Mathf.Abs(firePoint.localPosition.x), firePoint.localPosition.y, firePoint.localPosition.z);
     } 
 }
