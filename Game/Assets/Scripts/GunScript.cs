@@ -8,7 +8,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] SpriteRenderer spriteRenderer;
     public float fireRate = 0.5f;
-    public float maxAngle = 45f;
+    public float maxAngle = 60f;
     private bool isFacingRight = false;
     private float nextFireTime = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,9 +39,13 @@ public class GunScript : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (!isFacingRight)
+            angle = Mathf.Atan2(direction.y, -direction.x) * Mathf.Rad2Deg;
         angle = Mathf.Clamp(angle, -maxAngle, maxAngle);
-        if (!isFacingRight) angle = -angle;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        if (!isFacingRight)
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
+        else
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
     public void FlipWeapon(bool isFacingRight)
     {
