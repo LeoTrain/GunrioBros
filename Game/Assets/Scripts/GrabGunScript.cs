@@ -4,6 +4,7 @@ public class GrabGunScript : MonoBehaviour
 {
     [SerializeField] private Transform _grabPoint;
     [SerializeField] private GameObject _grabbedGun;
+    public bool isGrabbed = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,18 +35,19 @@ public class GrabGunScript : MonoBehaviour
             weapon.transform.position = _grabPoint.position;
             weapon.transform.SetParent(_grabPoint);
             _grabbedGun = weapon;
+            isGrabbed = true;
             return true;
         }
         return false;
     }
 
-    public void TurnWeapon()
+    public void RemoveWeapon()
     {
         if (_grabbedGun != null)
         {
-            _grabbedGun.transform.Rotate(0, 180, 0);
+            _grabbedGun.transform.SetParent(null);
+            _grabbedGun = null;
+            isGrabbed = false;
         }
     }
-
-
 }

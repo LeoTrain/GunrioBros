@@ -23,6 +23,7 @@ public class BulletScript : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
+            // Make it so the bullet passes through the player
             return;
         }
         Destroy(gameObject);

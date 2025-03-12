@@ -217,14 +217,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41425653}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -79.54, y: 1.513, z: 0.91683984}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1666256951}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &41425657
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1805,6 +1805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grabPoint: {fileID: 723060130}
   _grabbedGun: {fileID: 0}
+  isGrabbed: 0
 --- !u!4 &1812235848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7215479811596314533, guid: 08b8be7dee0034c43a4b714bf04eec52, type: 3}

@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject current_weapon;
     [SerializeField] private Transform _grabPoint;
     private float moveInput = 0f;
-    private bool isFacingRight = true;
+    private bool isFacingRight = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,28 +42,55 @@ public class PlayerScript : MonoBehaviour
         if (isFacingRight)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
+
+            if (_grabPoint.transform.childCount > 0)
+            {
+                Transform gun = _grabPoint.transform.GetChild(0);
+                Debug.Log("Before rotation: " + _grabPoint.transform.localRotation.eulerAngles);
+                _grabPoint.transform.localRotation = Quaternion.Euler(0, isFacingRight ? 180 : 0, 0);
+                Debug.Log("After rotation: " + _grabPoint.transform.localRotation.eulerAngles);
+            }
+            else
+                Debug.LogWarning("No child object found under _grabPoint!");
+         
             try
             {
-                //_grabPoint.GetComponent<GrabGunScript>().Turn(1);
-                this.GetComponent<GrabGunScript>().TurnWeapon();
+                // if (GetComponent<GrabGunScript>().isGrabbed)
+                    // _grabPoint.GetChild(0).GetComponent<GunScript>().FlipWeapon(isFacingRight);
+                    // _grabPoint.transform.localRotation.eulerAngles.Set(0, 0, 0);
+                    // _grabPoint.transform.localRotation = Quaternion.Euler(0, 180, 0);
             }
-            catch (System.Exception)
+            catch
             {
-                Debug.Log("No weapon right turn");
+                Debug.Log("Error turning grab point child 0");
             }
+
         }
         else
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
-            // try
-            // {
-            //     //_grabPoint.GetComponent<GrabGunScript>().Turn(-1);
-            //     _grabPoint.GetComponentInChildren<GrabGunScript>().Turn(-1);
-            // }
-            // catch (System.Exception)
-            // {
-            //     Debug.Log("No weapon");
-            // }
+
+            if (_grabPoint.transform.childCount > 0)
+            {
+                Transform gun = _grabPoint.transform.GetChild(0);
+                Debug.Log("Before rotation: " + _grabPoint.transform.localRotation.eulerAngles);
+                _grabPoint.transform.localRotation = Quaternion.Euler(0, isFacingRight ? 0 : 180, 0);
+                Debug.Log("After rotation: " + _grabPoint.transform.localRotation.eulerAngles);
+            }
+            else
+                Debug.LogWarning("No child object found under _grabPoint!");
+
+            try
+            {
+                // if (GetComponent<GrabGunScript>().isGrabbed)
+                    // _grabPoint.GetChild(0).GetComponent<GunScript>().FlipWeapon(isFacingRight);
+                    // _grabPoint.transform.localRotation.eulerAngles.Set(0, 180, 0);
+                    // _grabPoint.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
+            catch
+            {
+                Debug.Log("Error turning grab point child 0");
+            }
         }
     }
 
