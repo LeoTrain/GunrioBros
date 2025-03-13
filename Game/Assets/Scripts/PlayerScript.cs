@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject current_weapon;
     [SerializeField] private Transform _grabPoint;
     private float moveInput = 0f;
+    [SerializeField] private GameObject _cinemachine;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -63,7 +64,7 @@ public class PlayerScript : MonoBehaviour
     {
         //this.animator.SetTrigger("Jump");
         myRigidBody.linearVelocity = new Vector2(this.myRigidBody.linearVelocity.x, this.jumpHeight);
-        this.jumpCount = 1;
+        jumpCount = 1;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -74,5 +75,7 @@ public class PlayerScript : MonoBehaviour
             //this.animator.SetTrigger("idle_left_mario");
         }
     }
+
+
 
 }
