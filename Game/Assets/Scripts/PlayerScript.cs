@@ -79,7 +79,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnEnterPipe(Vector3 _teleportPoint)
     {
-        _cinemachineConfiner.enabled = false;
+        // _cinemachineConfiner.enabled = false;
         this.transform.position = _teleportPoint;
     }
 
