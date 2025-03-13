@@ -41,6 +41,7 @@ public class ConsumableCollisionScript : MonoBehaviour
     public void StarPowerPlayer()
     {
       // To modify with the actual power up logic
+      GetComponent<PlayerScript>().SetAnimatorBool("Star");
       return ;
     }
 }

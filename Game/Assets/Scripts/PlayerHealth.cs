@@ -64,7 +64,6 @@ public class PlayerHealthScript : MonoBehaviour
 
     private bool IsInDeadZone()
     {
-        Debug.Log("Dead Zone: " + _deadZone.position.y + " Player: " + transform.position.y);
         return transform.position.y < _deadZone.position.y;
     }
 

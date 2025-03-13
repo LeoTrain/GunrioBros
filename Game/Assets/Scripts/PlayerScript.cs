@@ -32,6 +32,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) { this.moveInput = 1f; isFacingRight = true; Turn(); };
         if (Input.GetKey(KeyCode.A)) { this.moveInput = -1f; isFacingRight = false; Turn(); };
         if (Input.GetKeyDown(KeyCode.Space) && this.jumpCount == 0) this.Jump();
+        if ((Input.GetKeyUp(KeyCode.A) && !isFacingRight ) || (Input.GetKeyUp(KeyCode.D) && isFacingRight)) SetAnimatorBool("Idle");
     }
 
     void FixedUpdate()
@@ -55,6 +56,9 @@ public class PlayerScript : MonoBehaviour
 
     void Move()
     { 
+        if (moveInput != 0 && jumpCount == 0)
+            SetAnimatorBool("Run");
+
         float targetVelocity = this.moveInput * this.speed;
         float velocityDifference = targetVelocity - this.myRigidBody.linearVelocity.x;
         float force = (this.moveInput != 0) ? this.acceleration * velocityDifference : -this.deceleration * this.myRigidBody.linearVelocity.x;
@@ -63,7 +67,7 @@ public class PlayerScript : MonoBehaviour
 
     void Jump()
     {
-        //this.animator.SetTrigger("Jump");
+        SetAnimatorBool("Jump");
         myRigidBody.linearVelocity = new Vector2(this.myRigidBody.linearVelocity.x, this.jumpHeight);
         jumpCount = 1;
     }
@@ -73,7 +77,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.tag == "Terrain" || collision.gameObject.tag == "Block")
         {
             this.jumpCount = 0;
-            //this.animator.SetTrigger("idle_left_mario");
+            SetAnimatorBool("Idle");
         }
     }
 
@@ -83,6 +87,30 @@ public class PlayerScript : MonoBehaviour
         this.transform.position = _teleportPoint;
     }
 
+    public void SetAnimatorBool(string name)
+    {
+        switch (name)
+        {
+            case "Idle":
+                animator.SetBool("isIdle", true);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isJumping", false);
+                break;
+            case "Run":
+                animator.SetBool("isIdle", false);
+                animator.SetBool("isRunning", true);
+                animator.SetBool("isJumping", false);
+                break;
+            case "Jump":
+                animator.SetBool("isIdle", false);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isJumping", true);
+                break;
+            case "Star":
+                animator.SetBool("isStar", true);
+                break;
+        }
+    }
 
 
 }
