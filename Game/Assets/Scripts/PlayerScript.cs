@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -15,7 +16,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject current_weapon;
     [SerializeField] private Transform _grabPoint;
     private float moveInput = 0f;
-    [SerializeField] private GameObject _cinemachine;
+    [SerializeField] private CinemachineConfiner2D _cinemachineConfiner;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -74,6 +75,12 @@ public class PlayerScript : MonoBehaviour
             this.jumpCount = 0;
             //this.animator.SetTrigger("idle_left_mario");
         }
+    }
+
+    public void OnEnterPipe(Vector3 _teleportPoint)
+    {
+        _cinemachineConfiner.enabled = false;
+        this.transform.position = _teleportPoint;
     }
 
 

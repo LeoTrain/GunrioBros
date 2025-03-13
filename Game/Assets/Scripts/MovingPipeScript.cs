@@ -25,7 +25,7 @@ public class MovingPipeScript : MonoBehaviour
 
     private void TeleportPlayer(GameObject player)
     {
-        player.transform.position = _teleportPoint.position;
+        player.GetComponent<PlayerScript>().OnEnterPipe(_teleportPoint.position);
     }
 
     private bool IsPlayerPressingDown(GameObject player)
