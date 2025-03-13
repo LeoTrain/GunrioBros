@@ -8,6 +8,7 @@ public class GoombaScript : MonoBehaviour
   public float boundarySize = 5f;
   public float playerFindRadius = 7f;
   public int lifePoints = 3;
+  private float _playerToGoombaDifference = 0.2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
@@ -36,8 +37,11 @@ public class GoombaScript : MonoBehaviour
   {
       if (collision.gameObject.tag == "Player")
       {
-        if (this.ComesFromAbove(collision.gameObject.transform.position.y)) Destroy(this.gameObject);
-        else collision.gameObject.GetComponent<PlayerHealthScript>().TakeDamage(1);
+        float playerY = collision.gameObject.transform.position.y - _playerToGoombaDifference;
+        if (ComesFromAbove(playerY)) 
+            Destroy(this.gameObject);
+        else 
+            collision.gameObject.GetComponent<PlayerHealthScript>().TakeDamage(1);
       }
   }
 

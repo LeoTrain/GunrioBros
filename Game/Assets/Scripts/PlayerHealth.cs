@@ -6,21 +6,33 @@ public class PlayerHealthScript : MonoBehaviour
 
     public int maxHealth = 2;
     private int currentHealth;
+    [SerializeField] private UpdateUIScript updateUIScript;
+    [SerializeField] private Transform _deadZone;
 
     void Start()
     {
         currentHealth = maxHealth;
+        updateUIScript.ResetStats(currentHealth);
     }
 
     void Update()
     {
-        
+        if (IsInDeadZone())
+            TakeDamage(maxHealth);
+        if (IsDead())
+            Die();
+    }
+
+    void FixedUpdate()
+    {
+        updateUIScript.UpdateHealth(currentHealth);
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-      //  Debug.Log("Current Health: " + currentHealth);
+        updateUIScript.UpdateHealth(currentHealth);
+    //    Debug.Log("Current Health: " + currentHealth);
         if (currentHealth <= 0)
         {
             Die();
@@ -43,5 +55,21 @@ public class PlayerHealthScript : MonoBehaviour
     private void Die()
     {
         gameObject.SetActive(false);
+    }
+
+    private void Restart()
+    {
+        currentHealth = maxHealth;
+    }
+
+    private bool IsInDeadZone()
+    {
+        Debug.Log("Dead Zone: " + _deadZone.position.y + " Player: " + transform.position.y);
+        return transform.position.y < _deadZone.position.y;
+    }
+
+    private bool IsDead()
+    {
+        return currentHealth <= 0;
     }
 }
